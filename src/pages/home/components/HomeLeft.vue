@@ -1,13 +1,9 @@
 <template>
   <div class="HomeLeft">
-    <el-collapse accordion style='{background:red}'>
-      <el-collapse-item>
-        <template slot="title">
-          首页<i class="header-icon el-icon-info"></i>
-        </template>
-      </el-collapse-item>
+    <div class='lwq-sho'>首页<i class="header-icon el-icon-info"></i></div>
+    <el-collapse accordion>
       <el-collapse-item title="商品">
-        <div style="{background:red}">商品管理</div>
+        <div>商品管理</div>
         <div>品类管理</div>
       </el-collapse-item>
       <el-collapse-item title="订单">
@@ -39,11 +35,20 @@ export default {
  }
 </script>
 
-<style lang="" scoped>
+<style lang="scss" scoped>
+@import '@/Scss/index.scss';
 .HomeLeft{
-  width:322px;
-  height:827px;
-  border:1px solid red;
-  background: #16171b;
+  // width:322px;
+  // height:827px;
+  // border:1px solid red;
+  // background: #16171b;
+  @include SizeBack(324px,827px,0,#16171b);
+}
+.lwq-sho{
+  @include SizeBack(324px,49px,0,#2b2e33);
+  color:$fontColor;
+}
+.el-collapse{
+  border:none;
 }
 </style>
