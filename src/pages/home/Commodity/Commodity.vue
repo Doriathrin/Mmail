@@ -3,7 +3,7 @@
     <h2 class='title'>用户管理</h2>
     <el-table
       :data="userList"
-      height="700px"
+      height="522px"
       border
       style="width:1200px">
       <el-table-column
@@ -21,6 +21,14 @@
         label="邮箱">
       </el-table-column>
     </el-table>
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page.sync="currentPage3"
+      :page-size="100"
+      layout="prev, pager, next, jumper"
+      :total="1000">
+    </el-pagination>
   </div>
 </template>
 
@@ -32,6 +40,7 @@ export default {
   data() { 
     return {
       userList:[],
+      currentPage3: 1,
     }
   },
   methods: {
@@ -42,6 +51,12 @@ export default {
       });
       console.log(res);
       this.userList=res.data.data.list;
+    },
+    handleSizeChange(val) {
+        console.log(`每页 ${val} 条`);
+      },
+    handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
     }
   },
   mounted() {
