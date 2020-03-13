@@ -4,7 +4,7 @@
       <el-form ref="form" :model="form" label-width="0px">
         <p class='login_title'>欢迎登录—MMALL管理系统</p>
         <el-form-item >
-          <el-input placeholder="请输入账号" v-model="form.name"></el-input>
+          <el-input placeholder="请输入账号" v-model="form.username"></el-input>
         </el-form-item>
         <el-form-item>
           <el-input placeholder="请输入密码" v-model="form.password" show-password></el-input>
@@ -18,26 +18,33 @@
 </template>
 
 <script>
-import { Request } from "@/until/request";
-import { login } from "../request/http";
+// import { Request } from "@/until/request";
+import { login } from "@/request/http";
 export default {
   name: 'Login',
   data() { 
     return {
       form: {
-          username: 'admin',
-          password: 'admin',
+          username: '',
+          password: '',
         }
     }
   },
   methods: {
     onSubmit() {
-      Request.getData({
-        url:`/api/user/login.do?username=${this.form.username}&password=${this.form.password}`,
-        method:'post'
-      }).then((data)=>{
+      // Request.getData({
+      //   url:`/api/user/login.do?username=${this.form.username}&password=${this.form.password}`,
+      //   method:'post'
+      // })
+      login(this.form).then((data)=>{
         console.log(data);
-        this.$router.push('/home');
+        if (data.data.status==0) {
+          this.$message(data.data.msg);
+          localStorage.setItem('admin',this.form.username);
+          this.$router.push('/home');
+        } else {
+          this.$message(data.data.msg);
+        }
       })
     }
   },
