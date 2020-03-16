@@ -8,7 +8,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/login',
       name: 'Login',
       component: Login,
       meta:{title:'登录系统'}
@@ -23,7 +23,8 @@ export default new Router({
           name: 'Commodity',
           component: Commodity
         }
-      ]
+      ],
+      redirect: '/commodity'
     },
   ]
 })

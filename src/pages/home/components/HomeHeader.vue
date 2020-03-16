@@ -10,8 +10,8 @@
       <el-col :xs="4" :sm="6" :md="8" :lg="9" :xl="11">
         <div class="grid-content bg-purple-light">
           <ul>
-            <li><i class='iconfont'>&#xe608;</i></li>
-            <li>欢迎</li>
+            <li @click='handleCommand'><i class='iconfont'>&#xe608;</i></li>
+            <li>欢迎,admin</li>
             <li><i class='iconfont'>&#xe811;</i></li>
           </ul>
         </div>
@@ -29,7 +29,9 @@ export default {
     }
   },
   methods: {
-
+    handleCommand(){
+      this.$router.push('/');
+    }
   },
   mounted() {
 

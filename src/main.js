@@ -6,6 +6,7 @@ import router from './router'
 import './assets/styles/border.css'
 import './assets/styles/iconfont.css'
 import vueResource from 'vue-resource'
+import MyPlugin from "@/MyPlugin";
 import ElementUI from 'element-ui'
 
 import 'element-ui/lib/theme-chalk/index.css'
@@ -15,8 +16,8 @@ router.beforeEach((to, from, next) => {
   document.title = `${to.meta.title} | HappyMmail后端管理系统` 
   const role = localStorage.getItem('admin');
   // 当我们没有登录状态信息，我们给他转到login
-  if (!role&&to.path !== '/') {
-    next('/')
+  if (!role && to.path !== '/login') {
+    next('/login')
   } else if (to.meta.permission) { //保留 如果有权限页面 超级管理员 一般管理员 一般用户 客户
     // 判断权限
     role==='admin'?next():next('/403')
@@ -30,6 +31,7 @@ router.beforeEach((to, from, next) => {
   }
 })
 
+Vue.use(MyPlugin)
 Vue.use(ElementUI)
 Vue.use(vueResource)
 Vue.config.productionTip = false
