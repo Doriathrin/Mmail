@@ -1,9 +1,6 @@
 <template>
   <div class="commodity">
     <h2 class='title'>用户管理</h2>
-    <!-- <ul>
-      <li v-for='(item,key) in listData' :key='key'>{{item}}</li>
-    </ul> -->
     <el-table
       :data="listData"
       height="522px"
@@ -92,13 +89,13 @@ export default {
       // this.total=res.data.data.total;
     },
 
-    async change(page){
-      this.currpage=page
-      await userPagination({pageNum:this.currpage}).then((res)=>{
-        console.log(res);
-        // this.userList=res.data.data.list
-      })
-    },
+    // async change(page){
+    //   this.currpage=page
+    //   await userPagination({pageNum:this.currpage}).then((res)=>{
+    //     console.log(res);
+    //     // this.userList=res.data.data.list
+    //   })
+    // },
     handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
       },
