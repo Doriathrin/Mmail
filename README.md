@@ -1,5 +1,4 @@
 # Mmail
-<<<<<<< HEAD
 
 > A Vue.js project
 
@@ -59,6 +58,3 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 5.  码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
 6.  码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
 
-=======
-Background management system project
->>>>>>> 647a7d1a44be725239d1d3a17ff437e931799ee4
