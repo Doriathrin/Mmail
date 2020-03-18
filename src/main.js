@@ -11,6 +11,15 @@ import ElementUI from 'element-ui'
 
 import 'element-ui/lib/theme-chalk/index.css'
 
+
+import VueQuillEditor from 'vue-quill-editor'
+
+import 'quill/dist/quill.core.css' // import styles
+import 'quill/dist/quill.snow.css' // for snow theme
+import 'quill/dist/quill.bubble.css' // for bubble theme
+
+Vue.use(VueQuillEditor)
+
 // 使用钩子函数对路由进行权限跳转   总共有7个beforeResolve beforeEach afterEach 全局钩子有3个 组件内部3个
 router.beforeEach((to, from, next) => {
   document.title = `${to.meta.title} | HappyMmail后端管理系统` 

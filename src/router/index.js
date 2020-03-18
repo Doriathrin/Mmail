@@ -5,6 +5,8 @@ import Home from '@/pages/home/Home'
 import Commodity from '@/pages/home/Commodity/Commodity.vue'
 import DetailView from "@/pages/home/DetailView/DetailView.vue";
 import Management from "@/pages/home/management/Management.vue";
+import Addthegoods from '@/pages/home/Addthegoods/Addthegoods.vue';
+import Look from '../pages/home/look/look.vue';
 Vue.use(Router)
 
 export default new Router({
@@ -39,6 +41,22 @@ export default new Router({
           component: Management,
           meta: {
             title: '系统首页/商品管理'
+          }
+        },
+        {
+          path: '/addthegoods',
+          name: 'Addthegoods',
+          component: Addthegoods,
+          meta: {
+            title: '系统首页/添加商品'
+          }
+        },
+        {
+          path: '/look',
+          name: 'Look',
+          component: Look,
+          meta: {
+            title: '系统首页/查看商品'
           }
         }
       ],
