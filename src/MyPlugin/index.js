@@ -1,43 +1,18 @@
-  let MyPlugin = {
-    istall (Vue, options) {
-      Vue.prototype.times = function (num) {
-        var oDate = new Date(num);
-        oYear = oDate.getFullYear();
-        oMonth = oDate.getMonth() + 1;
-        oDay = oDate.getDate();
-        oHour = oDate.getHours();
-        oSen = oDate.getSeconds();
-        oTime = oYear + '-' + addZero(oMonth) + '-' + addZero(oDate) + '' + addZero(oHour) + '-'
-        addZero(oMin) + ':' + addZero(oSen);
-        return oTime;
-      };
-      Vue.prototype.add = function () {
-        alert(1);
-      };
-      function addZero (num) {
-        if (parseInt(num) < 10) {
-          num = '0' + num;
-        };
-        return num;
-      };
-      Vue.filter('times', function (val) {
-          var oDate = new Date(val);
-          oYear = oDate.getFullYear();
-          oMonth = oDate.getMonth() + 1;
-          oDay = oDate.getDate();
-          oHour = oDate.getHours();
-          oSen = oDate.getSeconds();
-        if (oHour > 12) {
-            oHour='下午'+(oHour-12)
-        } else if(oHour==12){
-          oHour='中午'+oHour
-        } else {
-          oHour='上午'+oHour
-        }
-        var oTime = oYear + '-' + addZero(oMonth) + '-' + addZero(oDate) + '' + oHour + ':' +
-          addZero(oMin) + ':' + addZero(oSen);
-        return oTime;
-      })
-    }
-  }
-export default MyPlugin;
+function formatDate(unixtime) {
+  var data = new Date(unixtime);
+  var y = date.getFullYear();
+  var m = date.getMonth() + 1;
+  m = m < 10 ? ('0' + m) : m;
+  var d = date.getDate();
+  d = d < 10 ? ('0' + d) : d;
+  var h = date.getHours();
+  h = h < 10 ? ('0' + h) : h;
+  var minute = date.getMinutes();
+  var second = date.getSeconds();
+  minute = minute < 10 ? ('0' + minute) : minute;
+  second = second < 10 ? ('0' + second) : second;
+  return y + '-' + m + '-' + d + ' ' + h + ':' + minute;
+}
+module.exports = {
+  formatDate: formatDate
+}

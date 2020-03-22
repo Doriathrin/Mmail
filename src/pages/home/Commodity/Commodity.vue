@@ -25,7 +25,7 @@
         label="注册时间">
         <template slot-scope="scope">
           <p>
-            {{scope.row.createTime | times}}
+            {{scope.row.createTime | formatDate}}
           </p> 
         </template>
       </el-table-column>
@@ -47,6 +47,7 @@
 <script>
 import { userList } from "@/request/http";
 import { userPagination } from "@/request/http";
+import { formatDate } from '../../../MyPlugin/index'
 export default {
   name: 'Commodity',
   data() { 
@@ -101,7 +102,13 @@ export default {
       },
     handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
-    }
+    },
+    filters:{
+            formatDate(time){
+                var data = new Date(time);
+                return formatDate(data,'yyyy-MM-dd');
+            }
+        }
   },
   mounted() {
     this.BeforeMethod();

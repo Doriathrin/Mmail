@@ -20,14 +20,18 @@
               <router-link tag="el-menu-item" to="/management">
                 商品管理
               </router-link>
-              <el-menu-item index="1-2">品类管理</el-menu-item>
+              <router-link tag="el-menu-item" to="/category">
+                品类管理
+              </router-link>
             <!-- </el-menu-item-group> -->
           </el-submenu>
 
           <el-submenu index="2" style='background:#2b2e33;color:#fff'>
             <div slot="title" style='color:#fff'><i class="el-icon-menu"></i>订单</div>
             <!-- <el-menu-item-group style='background:#000000'> -->
-              <el-menu-item index="2-1">订单管理</el-menu-item>
+              <router-link tag="el-menu-item" to="/order" index="2-1">
+                  订单管理
+              </router-link>
             <!-- </el-menu-item-group> -->
           </el-submenu>
 
@@ -36,6 +40,12 @@
             <!-- <el-menu-item-group style='background:#000000'> -->
               <router-link tag="el-menu-item" to='/commodity'>
                 用户列表
+              </router-link>
+              <router-link tag="el-menu-item" to='/echarts'>
+                画图
+              </router-link>
+              <router-link tag="el-menu-item" to='/mapjs'>
+                百度地图
               </router-link>
             <!-- </el-menu-item-group> -->
           </el-submenu>
