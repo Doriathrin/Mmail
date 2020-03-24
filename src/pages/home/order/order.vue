@@ -24,7 +24,7 @@
         width="180">
       </el-table-column>
       <el-table-column
-        prop="name"
+        prop="receiverName"
         label="收件人"
         width="180">
       </el-table-column>

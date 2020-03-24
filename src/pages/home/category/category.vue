@@ -32,7 +32,8 @@ export default {
     async add(){
       const res=await categoryList({categoryId:0});
       console.log(res);
-      this.listData=res.data.data.list;
+      this.listData=res.data.data;
+      console.log(this.listData);
     }
   },
   mounted() {
