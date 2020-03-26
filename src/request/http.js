@@ -57,7 +57,7 @@ export const shopSearchPagination = data => Request.getData({
 
 // 品类管理
 export const categoryList = data => Request.getData({
-  url: `/api/category/get_category.do`,
+  url: `/api/category/get_category.do?categoryId=0`,
   method: 'get',
   data,
 })
@@ -71,7 +71,7 @@ export const add = (id, data) => Request.getData({
 
 // 商品创建
 export const establish = (list,data) => Request.getData({
-  url: `/api/product/save.do?categoryId=${list.categoryId}&name=${list.name}&username=${list.username}&secondname=${list.secondname}&=description${list.description}&num=${list.num}&inventory=${list.inventory}&fileList=${list.fileList}`,
+  url: `/api/product/save.do?categoryId=${list.categoryId}&name=${list.name}&username=${list.username}&secondname=${list.secondname}&description=${list.description}&num=${list.num}&inventory=${list.inventory}&name=${list.name}`,
   method: 'get',
   data,
 })
@@ -109,5 +109,13 @@ export const orderPage = data => Request.getData({
 export const orderSearch = data => Request.getData({
   url: `/api/order/search.do`,
   method: 'get',
+  data,
+})
+
+//查看
+//      /api/product/detail.do?productId=26
+export const check = (obj, data) => Request.getData({
+  url: `/api/product/detail.do?productId=${obj.id}`,
+  method: "get",
   data,
 })

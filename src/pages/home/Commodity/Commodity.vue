@@ -35,7 +35,6 @@
       next-text='下一页'
       background
       @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
       :current-page.sync="currpage"
       :page-size="pageSize"
       layout="prev, pager, next, jumper"
@@ -100,9 +99,6 @@ export default {
     handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
       },
-    handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
-    },
     filters:{
             formatDate(time){
                 var data = new Date(time);

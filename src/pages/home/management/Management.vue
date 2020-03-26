@@ -21,6 +21,7 @@
       :data="listData"
       height="522px"
       border
+      @row-click='data'
       style="width:1200px">
       <el-table-column
         prop="id"
@@ -45,9 +46,10 @@
       <el-table-column
         label="状态">
         <template slot-scope="scope">
-          <router-link tag="span" :to="'/look?id=' + scope.row.id ">
+          <span @click="look()">
             查看
-          </router-link>
+          </span>
+            
         </template>
       </el-table-column>
     </el-table>
@@ -72,6 +74,7 @@ import {shopListPagination} from '@/request/http'
 import {shopListSearch} from '@/request/http'
 // 搜索后分页
 import {shopSearchPagination} from '@/request/http'
+
 export default {
   name: 'Management',
   data() { 
@@ -83,7 +86,8 @@ export default {
       flag:false,
       searchType:'',  //查询条件
       searchName:'',   //关键字
-      type:''
+      type:'',
+      home:{}
     }
   },
   methods: {
@@ -131,10 +135,27 @@ export default {
         this.listData=res.data.data.list;
         this.total=res.data.data.total;
       }
-    }
+    },
+    look(){
+        if(this.home.id){
+          this.$router.push({
+            path:"/look",
+            query:{
+              id:this.home.id,
+              pageNum:this.currpage
+            }
+          })
+        }
+    },
+    data(row, event, column) {
+      console.log(row)
+      this.home=row
+
+    },
   },
   mounted() {
     this.OpenMethod();
+    
   },
  }
 </script>

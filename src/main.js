@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store/index'
 import './assets/styles/border.css'
 import './assets/styles/iconfont.css'
 import vueResource from 'vue-resource'
@@ -52,6 +53,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: {
     App
   },
