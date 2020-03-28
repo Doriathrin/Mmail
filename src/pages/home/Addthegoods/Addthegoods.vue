@@ -34,6 +34,7 @@
             </el-input>
           </el-form-item>
           <el-upload
+            name="upload_file"
             class="upload-demo"
             action="http://adminv2.happymmall.com/manage/product/upload.do"
             :on-preview="handlePreview"
@@ -127,10 +128,10 @@ export default {
       Submit(){
         establish(this.list).then((res)=>{
           console.log(res);
-          // this.$message( {
-          //       message:res.data.data,
-          //       type:"message"
-          //     })
+          this.$message( {
+                message:res.data.data,
+                type:"message"
+              })
         })
       }
   },
