@@ -29,8 +29,8 @@ router.beforeEach((to, from, next) => {
   document.title = `${to.meta.title} | HappyMmail后端管理系统`
   const role = localStorage.getItem('admin');
   // 当我们没有登录状态信息，我们给他转到login
-  if (!role && to.path !== '/login') {
-    next('/login')
+  if (!role && to.path !== '/') {
+    next('/')
   } else if (to.meta.permission) {
     // 如果是管理员权限则可进入，这里只是简单的模拟管理员权限而已
     //保留 如果有权限页面 超级管理员 一般管理员 一般用户 客户
