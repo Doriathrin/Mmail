@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     handleCommand(){
-      this.$router.push('/');
+      this.$router.push('/login');
     }
   },
   mounted() {

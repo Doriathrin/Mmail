@@ -1,5 +1,6 @@
 <template>
   <div class="order">
+    <div class="box-1">订单管理</div>
     <el-form :inline="true" class="demo-form-inline">
       <el-form-item label="查询方式">
         <el-select v-model="searchType" placeholder="按订单号查询">
@@ -19,9 +20,11 @@
       border
       style="width:1200px">
       <el-table-column
-        prop="orderNo"
         label="订单号"
         width="180">
+        <template slot-scope="scope">
+          <el-button type="text" size="small" @click="dialog(scope.row)">{{scope.row.orderNo}}</el-button>
+        </template>
       </el-table-column>
       <el-table-column
         prop="receiverName"
@@ -36,13 +39,10 @@
         prop="payment"
         label="订单总价">
       </el-table-column>
-      <el-table-column
-        prop="createTime"
-        label="注册时间">
+      <el-table-column prop="createTime" label="创建时间"></el-table-column>
+      <el-table-column prop="right" label="操作">
         <template slot-scope="scope">
-          <p>
-            {{scope.row.createTime}}
-          </p> 
+            <el-button type="text" size="small" @click="dialog(scope.row)">查看</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -61,6 +61,7 @@
 
 <script>
 import {order,orderList,orderPage,orderSearch} from '@/request/http'
+import { mapState,mapMutations,mapGetters,mapActions } from 'vuex'
 export default {
   name: 'Order',
   data() { 
@@ -117,6 +118,12 @@ export default {
         this.total=res.data.data.total;
       }
     },
+    ...mapMutations("a",['scope']),
+    dialog(scope){
+      this.scope(scope)
+      this.$router.push("/lineitem");
+      console.log(this.scope)
+    }
   },
   mounted() {
     this.add();
@@ -125,5 +132,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+@import "@/Scss/index.scss";
+.order{
+    height: 92vh;overflow: scroll;
+    padding: 0rem 2rem 5rem 2rem;
+    // background: #F3F3F3;
+}
+.box-1{
+    @include FontOnly(2rem);
+    @include Pd(1rem 0 1rem 0);
+}
 </style>

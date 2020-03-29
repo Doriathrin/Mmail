@@ -31,13 +31,17 @@ router.beforeEach((to, from, next) => {
   // 当我们没有登录状态信息，我们给他转到login
   if (!role && to.path !== '/login') {
     next('/login')
-  } else if (to.meta.permission) { //保留 如果有权限页面 超级管理员 一般管理员 一般用户 客户
+  } else if (to.meta.permission) {
+    // 如果是管理员权限则可进入，这里只是简单的模拟管理员权限而已
+    //保留 如果有权限页面 超级管理员 一般管理员 一般用户 客户
     // 判断权限
     role === 'admin' ? next() : next('/403')
   } else {
-    // 副文本编辑器 IE10才能用  简单判断IE10及一下浏览器不能进入副文本编辑器 这个组件不兼容
+    // 富文本编辑器 IE10才能用  简单判断IE10及一下浏览器不能进入富文本编辑器 这个组件不兼容
     if (navigator.userAgent.indexOf('MISE') > -1 && to.path === '/edit') {
-      alert('副文本编辑器组件不兼容IE10及以下浏览器')
+      Vue.prototype.$alert('vue-quill-editor组件不兼容IE10及以下浏览器，请使用更高版本的浏览器查看', '浏览器不兼容通知', {
+        confirmButtonText: '确定'
+      });
     } else {
       next();
     }

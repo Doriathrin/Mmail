@@ -39,17 +39,26 @@
       </el-table-column>
       <el-table-column
         label="状态">
-        <template slot-scope="scope">
-           {{scope.row.status=='1'?'在售':'已下架'}}
+          <template slot-scope="scope" column-key>
+          <!-- status  2已下架  1在售 -->
+          <span>{{scope.row.status | types}}</span>
+          <el-button
+            size="mini"
+            type="warning"
+            style="margin-left:20px"
+            @click="open2(scope.$index, scope.row)"
+          >{{scope.row.status | types2}}</el-button>
         </template>
       </el-table-column>
       <el-table-column
         label="状态">
         <template slot-scope="scope">
-          <span @click="look()">
+          <span @click="look(scope.row)">
             查看
           </span>
-            
+          <span @click="updata(scope.row)">
+            编辑
+          </span>
         </template>
       </el-table-column>
     </el-table>
@@ -74,7 +83,8 @@ import {shopListPagination} from '@/request/http'
 import {shopListSearch} from '@/request/http'
 // 搜索后分页
 import {shopSearchPagination} from '@/request/http'
-
+// 商品上架或下架
+import {shopSale} from '@/request/http'
 export default {
   name: 'Management',
   data() { 
@@ -136,27 +146,64 @@ export default {
         this.total=res.data.data.total;
       }
     },
-    look(){
-        if(this.home.id){
-          this.$router.push({
-            path:"/look",
-            query:{
-              id:this.home.id,
-              pageNum:this.currpage
+    shop() {
+      listData().then(res => {
+        // console.log(res.data.data.list);
+        this.listData = res.data.data.list;
+        this.total = res.data.data.total;
+      });
+    },
+    open2(index, row) {
+            var open = "";
+            if (row.status == 1) {
+                open = "下架";
+            } else {
+                open = "上架";
             }
-          })
-        }
+            this.$confirm("确定要" + open + "该商品吗?", "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+            }).then(() => {
+                var status = 0;
+                if (row.status == 1) {
+                    status = 2;
+                } else {
+                    status = 1;
+                }
+                shopSale({ productId: row.id, status: status }).then(res => {
+                    alert(res.data.data);
+                    if (res.data.status == 0) {
+                    this.shop();
+                    }
+                });
+        }).catch(() => {});
     },
     data(row, event, column) {
       console.log(row)
       this.home=row
 
     },
+    look(val){
+      // alert(val.id)
+      this.$router.push({path:'/look',query:{id:val.id}});
+    },
+    updata(val){
+      // alert(val.id)
+      this.$router.push({path:'/updata',query:{id:val.id}});
+    }
   },
   mounted() {
     this.OpenMethod();
-    
   },
+  filters: {
+    types(val) {
+      return val == 2 ? "以下架" : "在售";
+    },
+    types2(val) {
+      return val == 2 ? "上架" : "下架";
+    }
+  }
  }
 </script>
 

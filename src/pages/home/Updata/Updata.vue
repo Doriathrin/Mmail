@@ -1,7 +1,7 @@
 <template>
-  <div class="look">
-    <div class="h1">商品管理-查看商品</div>
-
+  <div class="updata">
+    <div class="h1">商品管理-修改商品</div>
+  
     <!-- 添加表单 -->
     <div class="addBox">
       <el-form ref="list" :model="list" label-width="80px">
@@ -13,12 +13,20 @@
         </el-form-item>
         <!-- 商品状态 -->
         <el-form-item label="商品状态">
-          <el-input placeholder="请输入商品描述" v-html="list.detail"></el-input>
+          <el-input placeholder="请输入商品描述" v-model="list.detail"></el-input>
         </el-form-item>
         <!-- 二级菜单 -->
-        <el-form-item label="所属分类">
-                <el-input style="width:50%" v-model="list.status"></el-input>
-        </el-form-item>
+        <template>
+          <span class="el-form-item__label span1">所属分类</span>
+          <el-select v-model="list.region" placeholder="请选择一级分类">
+            <el-option
+              v-for="(item,index) in tab"
+              :key="index"
+              :label="item.name"
+              :value="item.name"
+            ></el-option>
+          </el-select>
+        </template>
 
         <!-- 商品图片 -->
         <div class="div1">
@@ -57,32 +65,65 @@
 
         <!-- 富文本框 -->
       </el-form>
+       <el-button type="primary" plain  @click="updata">提交</el-button>
     </div>
   </div>
 </template>
 
 <script>
-import {check,categoryList} from '@/request/http'
+import { check,categoryList,updata } from "@/request/http";
 export default {
-  name: 'Look',
+  name: 'Updata',
   data() { 
     return {
+      list: {
+          name: "",
+          subtitle: "",
+          price: "",
+          select: "",
+          region: "",
+          region2:'',
+          stock:'',
+          detail:'',
+          content:'',
+          categoryId:0,
+          status: 1
+        },
       id: {},
-      list: {},
       tab:{}
     }
   },
   created () {
     this.id = this.$route.query.id;
   },
-  computed: {
-   
-  },
   methods: {
-    async adminList() {
+    //   把数据放入对象方便修改
+    async checkList() {
       var res = await check(this.id);
-      this.list = res.data.data;
+      let a = res.data.data;
+         this.list= {
+          name: a.name,
+          subtitle: a.subtitle,
+          price: a.price,
+          select: a.select,
+          region: a.region,
+          stock:a.stock,
+          detail:a.detail,
+          categoryId:a.categoryId,
+          status: a.status
+        }
     },
+    //   修改提交
+    async updata(){
+       await updata(this.list).then(res=>{
+           this.$message({
+                message:res.data.data,
+                type:"message"
+              })
+      })
+      this.$router.push('/management');
+    },
+
     async refeList(){
         var res = await categoryList(this.id);
       console.log(res);
@@ -90,19 +131,14 @@ export default {
       this.tab = res.data.data;
 
     }
-    
   },
   mounted() {
-    this.adminList();
+    this.checkList();
     this.refeList();
   },
-  
  }
 </script>
 
 <style lang="scss" scoped>
-img{
-  width:500px;
-  height:300px;
-}
+
 </style>

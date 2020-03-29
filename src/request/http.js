@@ -56,30 +56,79 @@ export const shopSearchPagination = data => Request.getData({
 })
 
 // 品类管理
-export const categoryList = data => Request.getData({
+export const categoryList = (obj,data) => Request.getData({
   url: `/api/category/get_category.do?categoryId=0`,
   method: 'get',
-  data,
 })
 
-// 二级联动
-export const add = (id, data) => Request.getData({
-  url: `/api/category/get_category.do?categoryId=${id}`,
-  method: 'get',
-  data,
+// 修改名称
+export const UpdataName = (obj, data) => Request.getData({
+  url: `/api/category/set_category_name.do?categoryId=${obj.categoryId}&categoryName=${obj.categoryName}`,
+  method: "get",
+  data
 })
 
-// 商品创建
-export const establish = (list,data) => Request.getData({
-  url: `/api/product/save.do?categoryId=${list.categoryId}&name=${list.name}&username=${list.username}&secondname=${list.secondname}&description=${list.description}&num=${list.num}&inventory=${list.inventory}&name=${list.name}`,
-  method: 'get',
-  data,
+// 添加品类     提交品类
+export const categoryadd = (obj, data) => Request.getData({
+  url: `/api/category/add_category.do?parentId=0&categoryName=${obj}`,
+  method: "get",
+  data
 })
 
-// 上传图片
-export const upload = data => Request.getData({
-  url: `/api/product/upload.do`,
+
+//  http://adminv2.happymmall.com/manage/category/get_category.do?categoryId=100005
+export const ViewSubcategories = (obj, data) => Request.getData({
+  url: `/api/category/get_category.do?categoryId=${obj}`,
+  method: "get",
+  data
+})
+
+// // 二级联动
+// export const add = (id, data) => Request.getData({
+//   url: `/api/category/get_category.do?categoryId=${id}`,
+//   method: 'get',
+//   data,
+// })
+
+// // 商品创建
+// export const establish = (list,data) => Request.getData({
+//   url: `/api/product/save.do?categoryId=${list.categoryId}&name=${list.name}&username=${list.username}&secondname=${list.secondname}&description=${list.description}&num=${list.num}&inventory=${list.inventory}&detail=${list.detail}$upload_file=${list.upload_file}`,
+//   method: 'get',
+//   data,
+// })
+
+//商品管理     添加商品     一级分类菜单
+export const additive = data => Request.getData({
+    url:"/api/category/get_category.do?categoryId=0",
+    method:"get",
+    data,
+})
+//商品管理     添加商品     二级分类菜单
+export const additive2 = (obj,data) => Request.getData({
+// /category/get_category.do?categoryId=100056
+    url:`/api/category/get_category.do?categoryId=${obj}`,
+    method:"get",
+    data,
+})
+//商品管理     添加商品     提交
+export const cook = (obj,data) => Request.getData({
+    url:`/api/product/save.do?categoryId=${obj.categoryId}&name=${obj.name}&subtitle=${obj.subtitle}&mainImage=${obj.mainImage}&detail=${obj.detail}&price=${obj.price}&stock=${obj.stock}&status=${obj.status}`,
+    method:"get",
+    data,
+})
+
+// 修改商品
+export const updata = (list, data) => Request.getData({
+  url: `/api/product/save.do?categoryId=${list.categoryId}&name=${list.name}&subtitle=${list.subtitle}&subImages=${list.mainImage}&detail=${list.detail}&price=${list.price}&stock=${list.stock}&status=${list.status}&region=${list.region}`,
   method: 'get',
+  data,
+
+})
+
+//商品管理上架  下架
+export const shopSale = data => Request.getData({
+  url: "/api/product/set_sale_status.do",
+  method: "get",
   data,
 })
 
@@ -114,8 +163,8 @@ export const orderSearch = data => Request.getData({
 
 //查看
 //      /api/product/detail.do?productId=26
-export const check = (obj, data) => Request.getData({
-  url: `/api/product/detail.do?productId=${obj.id}`,
+export const check = (id, data) => Request.getData({
+  url: `/api/product/detail.do?productId=${id}`,
   method: "get",
   data,
 })

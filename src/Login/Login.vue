@@ -23,25 +23,49 @@ import { login } from "@/request/http";
 export default {
   name: 'Login',
   data() { 
+    var validatePass = (rule,value,callback)=>{
+      if (value==="") {
+          callback(new Error("请输入账户"))
+      }
+    }
+    var validatePass2 = (rule,value,callback)=>{
+      if (value==="") {
+          callback(new Error("请输入密码"))
+      }
+    }
     return {
       form: {
-          username: '',
-          password: '',
-        }
+          username:"admin",
+          password:"admin"
+        },
+      username:"",
+      password:"",
+      rules:{
+      pass:[{validator:validatePass,trigger:"blur"}],
+      checkPass:[{validator:validatePass2,trigger:"blur"}]
+      },
+      local:{userToken:false}  
     }
   },
   methods: {
+      submitForm(formName){
+        this.$refs[formName].validate(valid=>{
+          if (valid) {
+              alert("submit!")
+          } else {
+            console.log("error submit!")
+            return false
+          }
+        })
+      },
+
     onSubmit() {
-      // Request.getData({
-      //   url:`/api/user/login.do?username=${this.form.username}&password=${this.form.password}`,
-      //   method:'post'
-      // })
       login(this.form).then((data)=>{
         console.log(data);
         if (data.data.status==0) {
-          this.$message(data.data.msg);
           localStorage.setItem('admin',this.form.username);
           this.$router.push('/home');
+          this.$message(data.data.msg);
         } else {
           this.$message(data.data.msg);
         }

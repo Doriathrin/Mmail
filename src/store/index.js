@@ -1,22 +1,24 @@
-import Vue from 'vue';
-import vuex from 'vuex';
-Vue.use(vuex);
-var store = new vuex.Store({
-  state: {
-    id: 0,
-    categoryId: 0,
-    scope: {},
-  },
-  mutations: {
-    changCtiyValue(state, city) { //  state  传过来的值
-      state.id = city
-      console.log(state.id);
+import Vue from 'vue'
+import Vuex from 'vuex'
+// import createPersistedState from 'vuex-persistedstate'
+import storeA from './storea'
+import storeB from './storeb'
+
+
+
+Vue.use(Vuex)
+
+
+export default new Vuex.Store({
+    modules:{
+        a:storeA,
+        b:storeB
     },
-  },
-  getters: {
-    doubleCity(state) {
-      return state.city
-    }
-  }
+    //本地存储
+    // plugins:[
+    //     createPersistedState({
+    //         storage:window.localStorage
+    //     })
+    // ]
+    
 })
-export default store

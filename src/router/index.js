@@ -11,6 +11,10 @@ import Echarts from '@/pages/home/echarts/echarts.vue'
 import Mapjs from '@/pages/home/Mapjs/mapjs.vue'
 import Order from '@/pages/home/order/order.vue'
 import Category from '@/pages/home/category/category.vue'
+import Updata from '@/pages/home/Updata/Updata.vue'
+import subCategory from '@/pages/home/subCategory/subCategory.vue'
+import categoryAdd from '@/pages/home/categoryAdd/categoryAdd.vue'
+import lineitem from '@/pages/home/order/lineitem.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -94,9 +98,41 @@ export default new Router({
           meta: {
             title: '系统首页/品类管理'
           }
+        },
+        {
+          path: '/updata',
+          name: 'Updata',
+          component: Updata,
+          meta: {
+            title: '系统首页/修改商品'
+          }
+        },
+        {
+          path: '/subCategory',
+          name: 'subCategory',
+          component: subCategory,
+          meta: {
+            title: '系统首页/其子品类'
+          }
+        },
+        {
+          path: '/categoryAdd',
+          name: 'categoryAdd',
+          component: categoryAdd,
+          meta: {
+            title: '系统首页/添加品类'
+          }
+        },
+        {
+          path: '/lineitem',
+          name: 'lineitem',
+          component: lineitem,
+          meta: {
+            title: '系统首页/查看'
+          }
         }
       ],
-      redirect: '/commodity'
+      redirect: '/detailView'
     },
   ]
 })
