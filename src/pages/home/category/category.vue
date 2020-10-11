@@ -1,5 +1,7 @@
 <template>
   <div class="category">
+    <el-progress :percentage="percentage" v-show='funt' :color="customColor" ></el-progress>
+    <div v-loading="loading" class="chuangko">
         <div class="box-1">
             品类管理
             <el-button type="primary" icon="el-icon-edit" @click="add">添加品类</el-button>
@@ -27,6 +29,7 @@
                   <el-button type="primary" @click="dialog2">确 定</el-button>
               </div>
             </el-dialog>
+    </div>
   </div>
 </template>
 
@@ -44,7 +47,11 @@ export default {
         categoryId: "",
         categoryName: "",
       },
-      formLabelWidth: '120px'
+      formLabelWidth: '120px',
+      loading:true,
+      percentage:20,
+      customColor: '#409eff',
+      funt:true
     }
   },
   methods: {
@@ -52,7 +59,18 @@ export default {
       categoryList(this.categoryId)
         .then(data => {
           data = data.data.data
-          this.list = data
+          this.list = data,
+          this.percentage=50
+          this.percentage=80,
+          this.percentage=100
+          console.log(this.percentage)
+          var fuxin=this.percentage
+          this.loading=false;
+          if (fuxin==100) {
+            this.funt=false
+          }else{
+            console.log('你好世界');
+          }
         })
     },
     add () {
@@ -90,6 +108,9 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/Scss/index.scss";
+.chuangko{
+  width: 90%;
+}
 .box{
     width:900px;
     height: 92vh;overflow: scroll;

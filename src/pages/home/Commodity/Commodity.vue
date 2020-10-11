@@ -117,4 +117,5 @@ export default {
 .commodity{
   @include SizeBack(1200px,827px,0px,#f3f3f3);
 }
+
 </style>

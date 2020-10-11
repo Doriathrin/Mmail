@@ -1,9 +1,9 @@
 <template>
   <div class="HomeLeft">
+    
     <el-container style="height: 500px; background:#2b2e33">
       <el-aside width="324px" style="background-color:#2b2e33">
         <el-menu :default-openeds="['1', '3']" >
-
           <el-submenu index="0" style='background:#2b2e33'>
             <router-link tag='div' slot="title" style='color:#fff'  to="/detailView">
               <i class="el-icon-message"></i>首页
@@ -17,9 +17,12 @@
           <el-submenu index="1" style='background:#2b2e33'>
             <div slot="title" style='color:#fff'><i class="el-icon-message"></i>商品</div>
             <!-- <el-menu-item-group style='background:#000000'> -->
-              <router-link tag="el-menu-item" to="/management">
+              <!-- <router-link tag="el-menu-item" @click="management" to="/management">
+                
+              </router-link> -->
+              <el-menu-item @click="management" >
                 商品管理
-              </router-link>
+              </el-menu-item>
               <router-link tag="el-menu-item" to="/category">
                 品类管理
               </router-link>
@@ -66,7 +69,10 @@ export default {
     }
   },
   methods: {
-    
+    management(){
+      console.log('nihao');
+      this.$router.push({path:'/management'})
+    }
   },
   mounted() {
 
@@ -77,7 +83,6 @@ export default {
 <style lang="scss" scoped>
 @import '@/Scss/index.scss';
 .HomeLeft{
-
   @include SizeBack(324px,827px,0,#2b2e33);
 }
 .lwq-sho{
@@ -100,11 +105,11 @@ export default {
 .el-menu-item-group__title{
     padding:0 0 0 0  !important;
 }
-.el-menu-item.is-active {
-    background-color: #2dafcb !important;
-}
-.el-menu-item {
-    background: #17191b !important;
-}
+// .el-menu-item.is-active {
+//     background-color: #000 !important;
+// }
+// .el-menu-item {
+//     background: #2dafcb ;
+// }
 
 </style>
